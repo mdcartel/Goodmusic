@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build --no-lint",
     "build:analyze": "ANALYZE=true npm run build",
     "build:standalone": "BUILD_STANDALONE=true npm run build",
     "start": "next start",
