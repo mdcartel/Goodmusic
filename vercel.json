@@ -11,5 +11,8 @@
     "env": {
       "NEXT_PUBLIC_APP_ENV": "production"
     }
-  }
+  },
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD"
 }
