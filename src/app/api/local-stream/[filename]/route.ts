@@ -5,16 +5,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FileStorageService } from '@/lib/fileStorage';
 import { DownloadedContentManager } from '@/lib/downloadedContentManager';
 
-interface RouteParams {
-  params: {
-    filename: string;
-  };
-}
-
 // GET /api/local-stream/[filename] - Stream local downloaded file
 export async function GET(
   request: NextRequest,
-  { params }: RouteParams
+  { params }: { params: { filename: string } }
 ) {
   try {
     const { filename } = params;
@@ -98,7 +92,7 @@ export async function GET(
 // HEAD /api/local-stream/[filename] - Check if local file is available
 export async function HEAD(
   request: NextRequest,
-  { params }: RouteParams
+  { params }: { params: { filename: string } }
 ) {
   try {
     const { filename } = params;
