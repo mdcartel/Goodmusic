@@ -137,8 +137,8 @@ export function useToast() {
 export function useAsyncToast() {
   const toast = useToast();
 
-  const executeWithToast = useCallback(async <T>(
-    operation: () => Promise<T>,
+  const executeWithToast = useCallback(async (
+    operation: () => Promise<any>,
     options: {
       loadingTitle: string;
       loadingDescription?: string;
@@ -146,10 +146,10 @@ export function useAsyncToast() {
       successDescription?: string;
       errorTitle?: string;
       errorDescription?: string;
-      onSuccess?: (result: T) => void;
+      onSuccess?: (result: any) => void;
       onError?: (error: Error) => void;
     }
-  ): Promise<T | null> => {
+  ): Promise<any | null> => {
     const loadingId = toast.loading(options.loadingTitle, options.loadingDescription);
 
     try {

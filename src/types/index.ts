@@ -10,6 +10,8 @@ export interface Song {
   youtubeUrl: string;
   extractedAt?: Date;
   streamUrl?: string;
+  tags?: string[];
+  popularity?: number;
 }
 
 export interface Mood {
