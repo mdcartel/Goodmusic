@@ -33,4 +33,77 @@ test.describe('Chatbot Interactions and Song Suggestions', () => {
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
+          success: true,
+          response: "I understand you're feeling down. Here are some uplifting songs that might help:",
+          suggestedSongs: [
+            {
+              id: 'test-song-1',
+              title: 'Happy Song',
+              artist: 'Test Artist',
+              mood: ['happy'],
+              thumbnail: '/api/placeholder-thumbnail',
+              duration: '3:30'
+            }
+          ]
+        })
+      });
+    });
+
+    // Open chatbot
+    await page.locator('[data-testid="chat-button"]').click();
+    
+    // Send a message
+    const chatInput = page.locator('[data-testid="chat-input"]');
+    await chatInput.fill('I feel sad today');
+    await page.locator('[data-testid="send-button"]').click();
+    
+    // Verify user message appears
+    await expect(page.locator('[data-testid="chat-message"]').last()).toContainText('I feel sad today');
+    
+    // Verify bot response appears
+    await expect(page.locator('[data-testid="chat-message"]').last()).toContainText('uplifting songs');
+    
+    // Verify suggested songs appear
+    await expect(page.locator('[data-testid="suggested-song"]')).toBeVisible();
+  });
+
+  test('should integrate chatbot suggestions with main music display', async ({ page }) => {
+    // Mock APIs
+    await page.route('/api/chat', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          success: true,
+          response: "Here are some chill tracks for you:",
+          suggestedSongs: [
+            {
+              id: 'chill-song-1',
+              title: 'Chill Vibes',
+              artist: 'Relaxed Artist',
+              mood: ['chill'],
+              thumbnail: '/api/placeholder-thumbnail',
+              duration: '4:15'
+            }
+          ]
+        })
+      });
+    });
+
+    // Open chatbot and send message
+    await page.locator('[data-testid="chat-button"]').click();
+    const chatInput = page.locator('[data-testid="chat-input"]');
+    await chatInput.fill('I need some chill music');
+    await page.locator('[data-testid="send-button"]').click();
+    
+    // Click on suggested song
+    await page.locator('[data-testid="suggested-song"]').first().click();
+    
+    // Verify song appears in main display
+    await expect(page.locator('[data-testid="song-card"]')).toContainText('Chill Vibes');
+    
+    // Verify mood selector updates
+    await expect(page.locator('[data-testid="mood-button"][data-mood="chill"]')).toHaveClass(/selected/);
+  });
+});
       
