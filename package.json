@@ -28,16 +28,31 @@
     "verify-build": "node scripts/verify-build.js",
     "postbuild": "echo 'Build completed successfully'",
     "setup": "node scripts/setup-ytdlp.js",
-    "test:integration": "node scripts/test-integration.js"
+    "setup:audio": "node scripts/setup-audio-extraction.js",
+    "test:integration": "node scripts/test-integration.js",
+    "test:audio-extraction": "jest src/lib/services/__tests__/audio-extraction.test.ts"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-popover": "^1.1.14",
+    "@radix-ui/react-slider": "^1.3.5",
+    "@tanstack/react-query": "^5.84.1",
+    "@tanstack/react-query-devtools": "^5.84.1",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "date-fns": "^4.1.0",
     "lucide-react": "^0.535.0",
     "next": "15.4.5",
+    "node-id3": "^0.2.9",
     "react": "19.1.0",
+    "react-day-picker": "^9.8.1",
     "react-dom": "19.1.0",
+    "sharp": "^0.34.3",
+    "sqlite3": "^5.1.7",
     "tailwind-merge": "^3.3.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "youtube-dl-exec": "^3.0.22",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

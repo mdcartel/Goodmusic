@@ -15,10 +15,11 @@ async function getSongsHandler(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const moodParam = searchParams.get('mood');
+    const searchParam = searchParams.get('search');
     const pageParam = searchParams.get('page');
     const limitParam = searchParams.get('limit');
     
-    log.debug('Fetching songs', 'API', { mood: moodParam, page: pageParam, limit: limitParam });
+    log.debug('Fetching songs', 'API', { mood: moodParam, search: searchParam, page: pageParam, limit: limitParam });
     
     // Validate and sanitize inputs
     const mood = validateMoodQuery(moodParam);
